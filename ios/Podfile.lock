@@ -1,0 +1,95 @@
+PODS:
+  - connectivity_plus (0.0.1):
+    - Flutter
+  - Flutter (1.0.0)
+  - flutter_image_compress_common (1.0.0):
+    - Flutter
+    - Mantle
+    - SDWebImage
+    - SDWebImageWebPCoder
+  - flutter_timezone (0.0.1):
+    - Flutter
+  - image_picker_ios (0.0.1):
+    - Flutter
+  - libwebp (1.5.0):
+    - libwebp/demux (= 1.5.0)
+    - libwebp/mux (= 1.5.0)
+    - libwebp/sharpyuv (= 1.5.0)
+    - libwebp/webp (= 1.5.0)
+  - libwebp/demux (1.5.0):
+    - libwebp/webp
+  - libwebp/mux (1.5.0):
+    - libwebp/demux
+  - libwebp/sharpyuv (1.5.0)
+  - libwebp/webp (1.5.0):
+    - libwebp/sharpyuv
+  - Mantle (2.2.0):
+    - Mantle/extobjc (= 2.2.0)
+  - Mantle/extobjc (2.2.0)
+  - path_provider_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - permission_handler_apple (9.3.0):
+    - Flutter
+  - SDWebImage (5.21.0):
+    - SDWebImage/Core (= 5.21.0)
+  - SDWebImage/Core (5.21.0)
+  - SDWebImageWebPCoder (0.14.6):
+    - libwebp (~> 1.0)
+    - SDWebImage/Core (~> 5.17)
+  - sqflite_darwin (0.0.4):
+    - Flutter
+    - FlutterMacOS
+
+DEPENDENCIES:
+  - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
+  - Flutter (from `Flutter`)
+  - flutter_image_compress_common (from `.symlinks/plugins/flutter_image_compress_common/ios`)
+  - flutter_timezone (from `.symlinks/plugins/flutter_timezone/ios`)
+  - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
+  - sqflite_darwin (from `.symlinks/plugins/sqflite_darwin/darwin`)
+
+SPEC REPOS:
+  trunk:
+    - libwebp
+    - Mantle
+    - SDWebImage
+    - SDWebImageWebPCoder
+
+EXTERNAL SOURCES:
+  connectivity_plus:
+    :path: ".symlinks/plugins/connectivity_plus/ios"
+  Flutter:
+    :path: Flutter
+  flutter_image_compress_common:
+    :path: ".symlinks/plugins/flutter_image_compress_common/ios"
+  flutter_timezone:
+    :path: ".symlinks/plugins/flutter_timezone/ios"
+  image_picker_ios:
+    :path: ".symlinks/plugins/image_picker_ios/ios"
+  path_provider_foundation:
+    :path: ".symlinks/plugins/path_provider_foundation/darwin"
+  permission_handler_apple:
+    :path: ".symlinks/plugins/permission_handler_apple/ios"
+  sqflite_darwin:
+    :path: ".symlinks/plugins/sqflite_darwin/darwin"
+
+SPEC CHECKSUMS:
+  connectivity_plus: cb623214f4e1f6ef8fe7403d580fdad517d2f7dd
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  flutter_image_compress_common: 1697a328fd72bfb335507c6bca1a65fa5ad87df1
+  flutter_timezone: 7c838e17ffd4645d261e87037e5bebf6d38fe544
+  image_picker_ios: 7fe1ff8e34c1790d6fff70a32484959f563a928a
+  libwebp: 02b23773aedb6ff1fd38cec7a77b81414c6842a8
+  Mantle: c5aa8794a29a022dfbbfc9799af95f477a69b62d
+  path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
+  permission_handler_apple: 4ed2196e43d0651e8ff7ca3483a069d469701f2d
+  SDWebImage: f84b0feeb08d2d11e6a9b843cb06d75ebf5b8868
+  SDWebImageWebPCoder: e38c0a70396191361d60c092933e22c20d5b1380
+  sqflite_darwin: 20b2a3a3b70e43edae938624ce550a3cbf66a3d0
+
+PODFILE CHECKSUM: 4305caec6b40dde0ae97be1573c53de1882a07e5
+
+COCOAPODS: 1.16.2
