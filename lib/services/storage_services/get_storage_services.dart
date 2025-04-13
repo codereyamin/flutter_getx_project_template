@@ -2,10 +2,10 @@ import 'package:flutter_getx_project_template/constant/app_storage_key.dart';
 import 'package:flutter_getx_project_template/utils/error_log.dart';
 import 'package:get_storage/get_storage.dart';
 
-class StorageServices {
-  StorageServices._privateConstructor();
-  static final StorageServices _instance = StorageServices._privateConstructor();
-  static StorageServices get instance => _instance;
+class GetStorageServices {
+  GetStorageServices._privateConstructor();
+  static final GetStorageServices _instance = GetStorageServices._privateConstructor();
+  static GetStorageServices get instance => _instance;
 
   ////////////// storage initial
   GetStorage box = GetStorage();
