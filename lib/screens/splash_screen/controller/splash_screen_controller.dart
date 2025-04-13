@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_getx_project_template/routes/app_routes.dart';
-import 'package:flutter_getx_project_template/services/storage_services/storage_services.dart';
+import 'package:flutter_getx_project_template/services/storage_services/get_storage_services.dart';
 import 'package:flutter_getx_project_template/utils/error_log.dart';
 
 class SplashScreenController extends GetxController {

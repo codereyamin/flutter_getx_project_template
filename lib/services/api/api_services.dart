@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter_getx_project_template/routes/app_routes.dart';
 import 'package:flutter_getx_project_template/services/api/api.dart';
-import 'package:flutter_getx_project_template/services/storage_services/storage_services.dart';
+import 'package:flutter_getx_project_template/services/storage_services/get_storage_services.dart';
 import 'package:flutter_getx_project_template/utils/error_log.dart';
 import 'package:flutter_getx_project_template/widgets/app_snack_bar/app_snack_bar.dart';
 import 'package:get/get.dart';

@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_getx_project_template/constant/app_api_end_point.dart';
 import 'package:flutter_getx_project_template/routes/app_routes.dart';
-import 'package:flutter_getx_project_template/services/storage_services/storage_services.dart';
+import 'package:flutter_getx_project_template/services/storage_services/get_storage_services.dart';
 import 'package:flutter_getx_project_template/utils/app_log.dart';
 import 'package:flutter_getx_project_template/utils/error_log.dart';
 import 'package:get/get.dart';
