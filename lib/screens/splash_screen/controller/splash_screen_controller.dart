@@ -6,7 +6,7 @@ import 'package:flutter_getx_project_template/utils/error_log.dart';
 
 class SplashScreenController extends GetxController {
   ////////////  object
-  StorageServices storageServices = StorageServices.instance;
+  GetStorageServices storageServices = GetStorageServices.instance;
   RxDouble animation = 0.0.obs;
   RxDouble animation2 = 0.0.obs;
 

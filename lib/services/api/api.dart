@@ -14,7 +14,7 @@ class AppApi {
   AppApi._privateConstructor();
   static final AppApi _instance = AppApi._privateConstructor();
   static AppApi get instance => _instance;
-  var storageServices = StorageServices.instance;
+  var storageServices = GetStorageServices.instance;
   AppApi() {
     _dio.options.baseUrl = AppApiEndPoint.instance.baseUrl;
     _dio.options.sendTimeout = const Duration(seconds: 120);
@@ -55,7 +55,8 @@ class AppApi {
           return handler.next(error); // Continue with error
         },
       ),
-      if (kDebugMode) PrettyDioLogger(requestHeader: true, request: true, compact: true, error: true, requestBody: true, responseHeader: true, responseBody: true),
+      if (kDebugMode)
+        PrettyDioLogger(requestHeader: true, request: true, compact: true, error: true, requestBody: true, responseHeader: true, responseBody: true),
     });
   }
   Dio get sendRequest => _dio;

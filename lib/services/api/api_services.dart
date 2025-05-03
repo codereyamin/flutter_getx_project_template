@@ -15,7 +15,7 @@ class ApiServices {
   static ApiServices get instance => _instance;
   //////////  object
   final api = AppApi();
-  var storageServices = StorageServices.instance;
+  var storageServices = GetStorageServices.instance;
   Future<dynamic> apiPutServices({required String url, dynamic body, int statusCode = 200, Map<String, dynamic>? query}) async {
     try {
       final response = await api.sendRequest.put(url, data: body, queryParameters: query);
@@ -52,7 +52,13 @@ class ApiServices {
     }
   }
 
-  Future<dynamic> apiPostServices({required String url, dynamic body, int statusCodeStart = 200, int statusCodeEnd = 299, Map<String, dynamic>? query}) async {
+  Future<dynamic> apiPostServices({
+    required String url,
+    dynamic body,
+    int statusCodeStart = 200,
+    int statusCodeEnd = 299,
+    Map<String, dynamic>? query,
+  }) async {
     try {
       final dynamic response = await AppApi().sendRequest.post(url, data: body);
       if (response.statusCode >= statusCodeStart && response.statusCode <= statusCodeEnd) {

@@ -19,19 +19,19 @@ dependencies:
   get: ^5.0.0-release-candidate-9.3.2
   # time zone related 
   flutter_timezone: ^4.1.0
-  timezone: ^0.10.0
+  timezone: ^0.10.1
   intl: ^0.20.2
   # ui related
   skeletonizer: ^1.4.3
   flutter_rating_bar: ^4.0.1
   flutter_xlider: ^3.5.0
-  connectivity_plus: ^6.1.3
+  connectivity_plus: ^6.1.4
   readmore: ^3.0.0
   # image related
   cached_network_image: ^3.4.1
   flutter_cache_manager: ^3.4.1
   flutter_image_compress: ^2.4.0
-  permission_handler: ^11.4.0
+  permission_handler: ^12.0.0+1
   image_picker: ^1.1.2
   # storage
   get_storage: ^2.1.1
@@ -41,7 +41,7 @@ dependencies:
   mime: ^2.0.0
   http_parser: ^4.1.2
   pretty_dio_logger: ^1.4.0
-  socket_io_client: ^3.0.2
+  socket_io_client: ^3.1.2
   http: ^1.3.0
 
 
