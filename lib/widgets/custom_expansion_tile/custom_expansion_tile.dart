@@ -10,13 +10,12 @@ class CustomExpansionTile extends StatefulWidget {
   final Curve reverseCurve;
   final Function()? onCollapse;
   final Function()? onExpand;
-  final GlobalKey cKey;
   final EdgeInsetsGeometry? margin;
   final EdgeInsetsGeometry? padding;
   final Decoration? decoration;
   const CustomExpansionTile({
     super.key,
-    required this.cKey,
+
     required this.title,
     required this.children,
     this.initiallyExpanded = false,
@@ -107,7 +106,6 @@ class CustomExpansionTileState extends State<CustomExpansionTile> with SingleTic
     return GestureDetector(
       onTap: _handleTap,
       child: Column(
-        key: widget.cKey,
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -117,7 +115,13 @@ class CustomExpansionTileState extends State<CustomExpansionTile> with SingleTic
             decoration: widget.decoration,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: [Expanded(child: widget.title), AnimatedContainer(duration: Durations.medium4, child: _isExpanded ? Icon(Icons.expand_less_outlined) : Icon(Icons.expand_more_outlined))],
+              children: [
+                Expanded(child: widget.title),
+                AnimatedContainer(
+                  duration: Durations.medium4,
+                  child: _isExpanded ? Icon(Icons.expand_less_outlined) : Icon(Icons.expand_more_outlined),
+                ),
+              ],
             ),
           ),
           SizeTransition(sizeFactor: _animation, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: widget.children)),
