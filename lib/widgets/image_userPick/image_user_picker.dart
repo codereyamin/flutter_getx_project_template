@@ -8,105 +8,178 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-// ignore_for_file: file_names
-Future<void> userImagePicker({required ImageSource source, required RxString localImagePath, required RxList<XFile> localImage, required Function() callBack}) async {
+Future<void> userImagePicker({required Function(List<String>) callBack}) async {
   try {
-    XFile? pickedField;
-    List<XFile>? pickedFieldImages;
-    if (source == ImageSource.camera) {
-      var cameraStatus = await Permission.camera.status;
+    List<XFile> pickedMedia = [];
+    List<String> localImagePaths = [];
 
-      if (cameraStatus.isGranted) {
-        pickedField = await ImagePicker().pickImage(source: source);
-      } else if (cameraStatus.isDenied) {
-        var cameraStatus2 = await Permission.camera.request();
-        if (cameraStatus2.isGranted) {
-          pickedField = await ImagePicker().pickImage(source: source);
+    bool permissionGranted = false;
+
+    if (Platform.isIOS) {
+      final status = await Permission.photos.status;
+      if (status.isGranted || status.isLimited) {
+        permissionGranted = true;
+      }
+
+      if (status.isDenied) {
+        var response = await askFirst(
+          acceptButton: "Allow Access",
+          title: "Allow Access to Photos and Media",
+          content: """Allow Access to Photos and Media
+
+We need access to your device's media library so you can select photos, videos, or files, like updating your profile picture or uploading documents.
+
+Your data is never shared and stays on your device unless you choose to upload it.""",
+        );
+        if (response) {
+          final requestResult = await Permission.photos.request();
+          if (requestResult.isGranted || requestResult.isLimited) {
+            permissionGranted = true;
+          }
+        }
+      }
+
+      if (status.isPermanentlyDenied) {
+        var response = await getCallAgainPermission(
+          acceptButton: "Open Settings",
+          title: "Allow Access to Photos and Media",
+          content: """Allow Access to Photos and Media
+
+We need access to your device's media library so you can select photos, videos, or files, like updating your profile picture or uploading documents.
+
+Your data is never shared and stays on your device unless you choose to upload it.""",
+        );
+        if (response) {
+          final storageStatus = await Permission.storage.status;
+          if (storageStatus.isGranted || storageStatus.isLimited) {
+            permissionGranted = true;
+          }
         } else {
-          AppSnackBar.error("Camera Permission Needed");
           return;
         }
-      } else if (cameraStatus.isRestricted) {
-        AppSnackBar.error("Camera Permission Restricted");
+      }
+    } else if (Platform.isAndroid) {
+      final storageStatus = await Permission.storage.status;
+      if (storageStatus.isGranted || storageStatus.isLimited) {
+        permissionGranted = true;
+      }
+
+      if (storageStatus.isDenied) {
+        var response = await askFirst(
+          acceptButton: "Allow Access",
+          title: "Allow Access to Photos and Media",
+          content: """Allow Access to Photos and Media
+
+We need access to your device's media library so you can select photos, videos, or files, like updating your profile picture or uploading documents.
+
+Your data is never shared and stays on your device unless you choose to upload it.""",
+        );
+        if (response) {
+          final requestResult = await Permission.storage.request();
+          if (requestResult.isGranted || requestResult.isLimited) {
+            permissionGranted = true;
+          }
+        }
+      }
+
+      if (storageStatus.isPermanentlyDenied) {
+        var response = await getCallAgainPermission(
+          acceptButton: "Open Settings",
+          title: "Allow Access to Photos and Media",
+          content: """Allow Access to Photos and Media
+
+We need access to your device's media library so you can select photos, videos, or files, like updating your profile picture or uploading documents.
+
+Your data is never shared and stays on your device unless you choose to upload it.""",
+        );
+        if (response) {
+          final storageStatus = await Permission.storage.status;
+          if (storageStatus.isGranted || storageStatus.isLimited) {
+            permissionGranted = true;
+          }
+        } else {
+          return;
+        }
+      }
+    }
+
+    if (permissionGranted) {
+      pickedMedia = await ImagePicker().pickMultipleMedia(limit: 10);
+
+      if (pickedMedia.isEmpty) {
         return;
       }
-    } else {
-      var mediaLibraryStatus = await Permission.mediaLibrary.status;
-      var mediaStorageStatus = await Permission.manageExternalStorage.status;
 
-      if (mediaLibraryStatus.isGranted || mediaStorageStatus.isGranted) {
-        pickedFieldImages = await ImagePicker().pickMultipleMedia(limit: 5);
-      } else {
-        var mediaLibraryStatus2 = await Permission.mediaLibrary.request();
-        var mediaStorageStatus2 = await Permission.manageExternalStorage.request();
+      localImagePaths = pickedMedia.map((xfile) => File(xfile.path).path).toList();
 
-        if (mediaLibraryStatus2.isGranted || mediaStorageStatus2.isGranted) {
-          pickedFieldImages = await ImagePicker().pickMultipleMedia(limit: 5);
-        } else {
-          AppSnackBar.error("Media Permission Needed");
-          return;
-        }
-      }
-    }
-
-    if (pickedField != null) {
-      localImagePath.value = pickedField.path;
-      callBack();
-    }
-
-    if (pickedFieldImages != null) {
-      localImage.value = pickedFieldImages;
-      callBack();
+      callBack(localImagePaths);
     }
   } catch (e) {
-    AppSnackBar.error("Something Was Wrong");
+    AppSnackBar.error("Something went wrong: ${e.toString()}");
   }
 }
 
-imageUserPicker({required RxString localImagePath, required RxList<XFile> localImage, required Function() callBack}) {
-  Get.bottomSheet(
-    Container(
-      margin: EdgeInsets.all(AppSize.height(value: 20.0)),
-      padding: EdgeInsets.all(AppSize.height(value: 10.0)),
-      decoration: BoxDecoration(color: AppColors.instance.white500, borderRadius: BorderRadius.circular(AppSize.width(value: 12.0))),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Align(
-            alignment: Alignment.topRight,
-            child: IconButton(
-              onPressed: () {
-                Navigator.pop(Get.context!);
-              },
-              icon: const Icon(Icons.close),
-            ),
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.pop(Get.context!);
-                    userImagePicker(source: ImageSource.camera, localImagePath: localImagePath, localImage: localImage, callBack: callBack);
-                  },
-                  child: Column(children: [Icon(Icons.camera_alt, size: 60, color: AppColors.instance.primary), const AppText(data: "Camera", fontWeight: FontWeight.w700)]),
-                ),
-              ),
-              Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.pop(Get.context!);
+Future<bool> askFirst({
+  String title = "Gallery",
+  String content = "This permission is required to continue. Please enable it from settings.",
+  String acceptButton = "Open Settings",
+  String cancelButton = "Cancel",
+}) async {
+  bool userConfirmed = false;
 
-                    userImagePicker(source: ImageSource.gallery, localImagePath: localImagePath, localImage: localImage, callBack: callBack);
-                  },
-                  child: Column(children: [Icon(Icons.collections, size: 60, color: AppColors.instance.primary), const AppText(data: "Gallery", fontWeight: FontWeight.w700)]),
-                ),
-              ),
-            ],
-          ),
-          const Gap(height: 20),
-        ],
-      ),
+  await Get.defaultDialog(
+    title: title,
+    content: AppText(data: content, textAlign: TextAlign.center),
+    radius: 8,
+    confirm: ElevatedButton(
+      onPressed: () async {
+        userConfirmed = true;
+        Get.closeAllDialogs();
+      },
+      child: AppText(data: acceptButton),
+    ),
+    cancel: TextButton(
+      onPressed: () {
+        userConfirmed = false;
+        Get.closeAllDialogs();
+      },
+      child: AppText(data: cancelButton),
     ),
   );
+  return userConfirmed;
+}
+
+Future<bool> getCallAgainPermission({
+  String title = "Gallery",
+  String content = "This permission is required to continue. Please enable it from settings.",
+  String acceptButton = "",
+  String cancelButton = "Cancel",
+}) async {
+  bool userConfirmed = false;
+
+  await Get.defaultDialog(
+    title: title,
+    content: AppText(data: content, textAlign: TextAlign.center),
+    radius: 8,
+    confirm: ElevatedButton(
+      onPressed: () async {
+        userConfirmed = true;
+        Get.closeAllDialogs();
+      },
+      child: AppText(data: acceptButton),
+    ),
+    cancel: TextButton(
+      onPressed: () {
+        userConfirmed = false;
+        Get.closeAllDialogs();
+      },
+      child: AppText(data: cancelButton),
+    ),
+  );
+
+  if (userConfirmed) {
+    await openAppSettings();
+  }
+
+  return userConfirmed;
 }
