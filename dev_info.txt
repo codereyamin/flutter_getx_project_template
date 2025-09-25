@@ -1,0 +1,21 @@
+java : 17.0.16 2025-07-15
+===============================================
+Mac/Linux: keytool -genkey -v -keystore key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias key
+key make command (windows): keytool -genkeypair -v -keystore key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias key
+===============================================
+
+===============================================
+Command to get SHA1 key: keytool -list -v -keystore key.jks
+===============================================
+
+===============================================
+
+first and last name: Tuhin Ikabl
+name of your organizational : codereyamin
+name of your City : Dhaka
+two-letter country code : BD
+State or Province : Dhaka
+password : tuhini12345678
+
+
+==================================================

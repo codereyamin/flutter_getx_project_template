@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_project_template/constant/app_colors.dart';
 import 'package:flutter_getx_project_template/utils/app_size.dart';

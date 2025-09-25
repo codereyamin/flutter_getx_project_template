@@ -1,8 +1,8 @@
-import 'package:beauty_service/utils/error_log.dart';
-import 'package:beauty_service/widgets/app_snack_bar/app_snack_bar.dart';
-import 'package:beauty_service/widgets/texts/app_text.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_project_template/utils/error_log.dart';
+import 'package:flutter_getx_project_template/widgets/app_snack_bar/app_snack_bar.dart';
+import 'package:flutter_getx_project_template/widgets/texts/app_text.dart';
 import 'package:get/get.dart';
 import 'package:map_location_picker/map_location_picker.dart';
 

@@ -1,7 +1,5 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_getx_project_template/constant/app_colors.dart';
-import 'package:flutter_getx_project_template/utils/app_size.dart';
-import 'package:flutter_getx_project_template/utils/gap.dart';
 import 'package:flutter_getx_project_template/widgets/app_snack_bar/app_snack_bar.dart';
 import 'package:flutter_getx_project_template/widgets/texts/app_text.dart';
 import 'package:get/get.dart';
